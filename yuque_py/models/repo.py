@@ -45,5 +45,4 @@ class Repo:
     @staticmethod
     def _get_url(user: str, group: str):
         assert user or group
-        api = f"users/{user}/repos" if user else f"groups/{group}/repos"
-        return api
+        return f"users/{user}/repos" if user else f"groups/{group}/repos"

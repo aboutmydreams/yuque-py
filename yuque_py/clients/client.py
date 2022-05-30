@@ -24,7 +24,9 @@ class Client(AbstractClient):
     ) -> typing.Dict:
         request_url = f"{self.api_host}/{api}"
         request_header = {"User-Agent": user_agent, "X-Auth-Token": self.user_token}
-        if method == "GET":
+        if method == "DELETE":
+            func = self._delete_request
+        elif method == "GET":
             func = self._get_request
         elif method == "POST":
             request_header["Content-Type"] = "application/json"
@@ -32,8 +34,6 @@ class Client(AbstractClient):
         elif method == "PUT":
             request_header["Content-Type"] = "application/json"
             func = self._put_request
-        elif method == "DELETE":
-            func = self._delete_request
         else:
             raise ValueError
         response = func(request_url, requests_data, request_header)
